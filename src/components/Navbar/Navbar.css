@@ -1,0 +1,342 @@
+/* ============================================
+   NAVBAR STYLES 🚀
+   ============================================ */
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 1rem 2rem;
+  transition: all 0.3s ease;
+}
+
+.navbar--scrolled {
+  background: rgba(5, 5, 15, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(139, 92, 246, 0.2);
+  padding: 0.75rem 2rem;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+}
+
+.navbar__container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+/* ============================================
+   LOGO
+   ============================================ */
+
+.navbar__logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  cursor: pointer;
+  z-index: 1100;
+  background: none;
+  border: none;
+  padding: 0.25rem 0.5rem;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+
+.navbar__logo:hover {
+  transform: scale(1.05);
+}
+
+.navbar__logo-icon {
+  font-size: 1.5rem;
+  animation: float 3s ease-in-out infinite;
+}
+
+.navbar__logo-text {
+  font-size: 1.2rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #8b5cf6, #06b6d4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ============================================
+   MENÚ DESKTOP
+   ============================================ */
+
+.navbar__menu {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar__link {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.5rem 0.85rem;
+  border-radius: 50px;
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.navbar__link:hover {
+  color: #ffffff;
+  background: rgba(139, 92, 246, 0.15);
+}
+
+.navbar__link--active {
+  color: #ffffff;
+  background: rgba(139, 92, 246, 0.2);
+  box-shadow: 0 0 12px rgba(139, 92, 246, 0.3);
+}
+
+.navbar__link-icon {
+  font-size: 0.85rem;
+}
+
+/* ============================================
+   BOTÓN HAMBURGUESA 🍔
+   ============================================ */
+
+.navbar__toggle {
+  display: none;
+  background: none;
+  border: 2px solid rgba(139, 92, 246, 0.4);
+  border-radius: 10px;
+  cursor: pointer;
+  padding: 0.5rem;
+  z-index: 1100;
+  min-width: 44px;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.navbar__toggle:hover {
+  background: rgba(139, 92, 246, 0.2);
+  border-color: rgba(139, 92, 246, 0.7);
+}
+
+.navbar__toggle-bar {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  pointer-events: none;
+}
+
+.navbar__toggle-bar span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: white;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+  transform-origin: center;
+}
+
+/* Animación X */
+.navbar__toggle--open .navbar__toggle-bar span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.navbar__toggle--open .navbar__toggle-bar span:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.navbar__toggle--open .navbar__toggle-bar span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ============================================
+   OVERLAY
+   ============================================ */
+
+.navbar__mobile-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1040;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(2px);
+}
+
+/* ============================================
+   MENÚ MÓVIL
+   ============================================ */
+
+.navbar__mobile-menu {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(5, 5, 15, 0.98);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  z-index: 1050;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 2rem;
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.navbar__mobile-menu--open {
+  display: flex;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Estrellas decorativas */
+.navbar__mobile-stars {
+  position: absolute;
+  top: 5rem;
+  display: flex;
+  gap: 2rem;
+  color: rgba(139, 92, 246, 0.4);
+  font-size: 0.75rem;
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* Brand dentro del menú */
+.navbar__mobile-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.navbar__mobile-brand-icon {
+  font-size: 2rem;
+  animation: float 3s ease-in-out infinite;
+}
+
+.navbar__mobile-brand-text {
+  font-size: 1.5rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #8b5cf6, #06b6d4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Lista de links */
+.navbar__mobile-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.navbar__mobile-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.875rem 2rem;
+  border-radius: 50px;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 1rem;
+  font-weight: 500;
+  width: 100%;
+  max-width: 300px;
+  justify-content: center;
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+  background: none;
+  cursor: pointer;
+  font-family: inherit;
+  text-decoration: none;
+}
+
+.navbar__mobile-link:hover {
+  color: white;
+  background: rgba(139, 92, 246, 0.15);
+  border-color: rgba(139, 92, 246, 0.3);
+  transform: scale(1.03);
+}
+
+.navbar__mobile-link--active {
+  color: white;
+  background: rgba(139, 92, 246, 0.2);
+  border-color: rgba(139, 92, 246, 0.4);
+  box-shadow: 0 0 20px rgba(139, 92, 246, 0.2);
+}
+
+.navbar__mobile-link-icon {
+  font-size: 1.1rem;
+}
+
+/* Footer del menú */
+.navbar__mobile-footer {
+  position: absolute;
+  bottom: 2rem;
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+@media (max-width: 768px) {
+  .navbar {
+    padding: 0.875rem 1.25rem;
+  }
+
+  .navbar--scrolled {
+    padding: 0.75rem 1.25rem;
+  }
+
+  /* Ocultar menú desktop */
+  .navbar__menu {
+    display: none;
+  }
+
+  /* Mostrar hamburguesa */
+  .navbar__toggle {
+    display: flex !important;
+  }
+}
+
+/* ============================================
+   ANIMACIONES
+   ============================================ */
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-4px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.4; }
+  50%       { opacity: 1; }
+}
