@@ -150,28 +150,33 @@ construcción de rutas con prefijo.
 El build genera `dist/`. No edites ese directorio manualmente: es un artefacto
 generado y se recrea en cada compilación.
 
-## Repositorio y CI de GitHub
+## Repositorio, CI y publicación en GitHub Pages
 
-Este proyecto se prepara como repositorio de código fuente; el workflow
-`.github/workflows/ci.yml` **no publica ni despliega una página**. GitHub Actions
-ejecuta pruebas, lint y build al hacer push o abrir un pull request hacia `main`
-o `master`.
+El repositorio conserva el código fuente. El workflow
+`.github/workflows/ci.yml` ejecuta pruebas, lint y build al hacer push o abrir
+un pull request hacia `main` o `master`. El workflow
+`.github/workflows/deploy-pages.yml` compila y publica el sitio en GitHub Pages
+al hacer push a `main` o iniciarlo manualmente desde **Actions**. La publicación
+usa la ruta de proyecto de este repositorio y genera `404.html` para que las
+rutas internas de la aplicación también abran al actualizar la página.
 
-Para preparar la publicación del código:
+En GitHub, ve a **Settings > Pages** y cambia **Build and deployment > Source**
+a **GitHub Actions**. La URL del sitio será:
 
-1. Crea un repositorio vacío en GitHub (sin README, licencia ni `.gitignore`
-   iniciales si ya existen localmente).
-2. Inicializa Git en la carpeta local, crea la rama `main`, agrega los archivos
-   y realiza el primer commit.
-3. Agrega la URL del repositorio GitHub como `origin` y sube `main`.
-4. Revisa la pestaña **Actions** para confirmar que `npm ci`, pruebas, lint y
-   build finalicen correctamente.
+```text
+https://diegocanek.github.io/nebuladev-portfolio-frontend/
+```
+
+Para que el formulario funcione en el sitio publicado, configura en
+**Settings > Secrets and variables > Actions > Variables** una variable llamada
+`VITE_API_BASE_URL` con la URL HTTPS pública de la API, por ejemplo
+`https://api.ejemplo.com/api/v1`. También configura CORS en el backend para
+permitir el origen `https://diegocanek.github.io`. Si no configuras la variable,
+el sitio se publicará, pero el formulario no podrá conectarse a un backend
+público. No uses secretos en variables `VITE_*`: se incorporan al JavaScript
+público del sitio.
 
 El `.gitignore` excluye `node_modules`, `dist`, `.env`, `.env.local` y otros
 archivos locales. Solo `.env.example`, que contiene valores de ejemplo sin
-secretos, debe subirse. Las variables `VITE_*` se incluyen en el JavaScript
-público generado; no pongas claves privadas en ellas.
-
-El formulario seguirá apuntando al backend local de desarrollo salvo que se
-configure otra URL antes de compilar. El workflow de CI no publica el frontend
-ni necesita secretos del backend.
+secretos, debe subirse. `dist/` es un artefacto generado por el workflow y no se
+versiona.
